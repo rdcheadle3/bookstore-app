@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const yup = require('yup');
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const db = require('./database/db.js'); 
 
@@ -62,8 +63,15 @@ router.post('/login', async (req, res) => {
     return res.status(401).json({ error: 'Invalid password' });
   }
 
-  // Password is correct, user is authenticated
-  return res.status(200).json({ message: 'Login successful' });
+  try {
+    // Generate a JWT with a secret key
+    const token = jwt.sign({ userId: user.id }, 'Bzia5B0j');
+
+    // Send the token as a response to the frontend
+    return res.status(200).json({ token });
+  } catch (error) {
+    return res.status(500).json({ error: 'An error occurred during login' });
+  }
 });
 
 module.exports = router;
