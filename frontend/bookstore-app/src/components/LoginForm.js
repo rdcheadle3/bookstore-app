@@ -1,7 +1,7 @@
 import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
-import './forms.css';
+import { Formik, Form, Field, ErrorMessage } from 'formik'; // Import necessary components from Formik library
+import * as Yup from 'yup'; // Import Yup for form validation
+import './forms.css'; // Import custom CSS
 
 const LoginForm = () => {
   const initialValues = {
@@ -10,14 +10,14 @@ const LoginForm = () => {
   };
 
   const validationSchema = Yup.object({
-    username: Yup.string().required('Username is required'),
-    password: Yup.string().required('Password is required'),
+    username: Yup.string().required('Username is required'), // Set validation rule for username field
+    password: Yup.string().required('Password is required'), // Set validation rule for password field
   });
 
   const handleSubmit = (values, { resetForm }) => {
     // Handle form submission logic here
-    console.log(values);
-    resetForm();
+    console.log(values); // Log form values to the console
+    resetForm(); // Reset the form after submission
   };
 
   return (
@@ -31,13 +31,13 @@ const LoginForm = () => {
         <Form>
           <div>
             <label htmlFor="username">Username:</label>
-            <Field type="text" id="username" name="username" />
-            <ErrorMessage name="username" component="div" className="error" />
+            <Field type="text" id="username" name="username" /> {/* Field component for username input */}
+            <ErrorMessage name="username" component="div" className="error" /> {/* Display error message for username validation */}
           </div>
           <div>
             <label htmlFor="password">Password:</label>
-            <Field type="password" id="password" name="password" />
-            <ErrorMessage name="password" component="div" className="error" />
+            <Field type="password" id="password" name="password" /> {/* Field component for password input */}
+            <ErrorMessage name="password" component="div" className="error" /> {/* Display error message for password validation */}
           </div>
           <button type="submit">Login</button>
         </Form>
@@ -47,4 +47,3 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
-
